@@ -5,8 +5,8 @@ import streamlit as st
 API_KEY = st.secrets["OPENROUTER_API_KEY"]
 
 # --- Streamlit App Setup ---
-st.set_page_config(page_title="AI App Idea Generator", page_icon="💡")
-st.title("💡 AI CHATBOT")
+st.set_page_config(page_title="NOVA AI CHATBOT", page_icon="💡")
+st.title("💡 NOVA AI CHATBOT")
 st.write("Ask any question and get a response using OpenRouter's free AI models.")
 
 # --- User Input Box ---
