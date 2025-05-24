@@ -6,7 +6,22 @@ This is a simple but powerful AI-based Streamlit app that generates creative res
 
 ## 🚀 Demo
 
-🔗 [Live Demo Link](https://your-deployed-app-link.com)  
-> _Replace this with your actual deployed Streamlit URL (e.g., Streamlit Cloud, Render, or your custom domain)._
+🔗 [Live Demo Link](https://ai-chatbot-8u7uwybdb7evgsrw7yxvat.streamlit.app/)  
 
 ---
+## 🧠 Features
+
+- Interactive and lightweight UI built with Streamlit.
+- Uses OpenRouter API to access powerful open-source LLMs like Mistral 7B.
+- Fast responses and easy to use.
+- Secure API key usage via `st.secrets`.
+
+---
+
+## 🛠️ Installation
+
+### 1. Clone this repository
+```bash
+git clone https://github.com/your-username/ai-app-idea-generator.git
+cd ai-app-idea-generator
+```
