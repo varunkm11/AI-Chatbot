@@ -25,3 +25,12 @@ This is a simple but powerful AI-based Streamlit app that generates creative res
 git clone https://github.com/your-username/ai-app-idea-generator.git
 cd ai-app-idea-generator
 ```
+### 2. Create and activate a virtual environment (optional but recommended)
+```bash
+python -m venv venv
+source venv/bin/activate   # On Windows use `venv\Scripts\activate`
+```
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
