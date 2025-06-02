@@ -34,3 +34,10 @@ source venv/bin/activate   # On Windows use `venv\Scripts\activate`
 ```bash
 pip install -r requirements.txt
 ```
+### 🔐 API Key Setup
+``` bash
+To keep your API key secure, use Streamlit Secrets:
+Create a .streamlit/secrets.toml file.
+Add the following:
+OPENROUTER_API_KEY = "your_openrouter_api_key_here"
+```
