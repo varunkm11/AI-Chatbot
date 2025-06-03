@@ -41,3 +41,16 @@ Create a .streamlit/secrets.toml file.
 Add the following:
 OPENROUTER_API_KEY = "your_openrouter_api_key_here"
 ```
+### 💻 Run the App Locally
+``` bash
+streamlit run app.py
+```
+### 📄 File Structure
+```bash
+📁 ai-app-idea-generator/
+├── app.py
+├── requirements.txt
+└── .streamlit/
+    └── secrets.toml
+```
+
