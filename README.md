@@ -53,8 +53,4 @@ streamlit run app.py
 └── .streamlit/
     └── secrets.toml
 ```
-```bash
-### Hiiiiiii
-```
-
 
