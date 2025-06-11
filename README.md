@@ -53,4 +53,8 @@ streamlit run app.py
 └── .streamlit/
     └── secrets.toml
 ```
+### 🤝 Contributing
+Pull requests are welcome! If you'd like to improve features, fix bugs, or add enhancements, feel free to open a PR. Please follow standard best practices in coding and documentation.
 
+### 🌟 Support
+If you find this project helpful, feel free to give it a ⭐ on GitHub and share it with others!
