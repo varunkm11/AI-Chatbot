@@ -1,0 +1,12 @@
+# Core dependencies for Heroku deployment
+streamlit==1.28.0
+requests==2.31.0
+
+# Real-time data dependencies
+yfinance==0.2.18
+feedparser==6.0.10
+wikipedia==1.4.0
+pytz==2023.3
+
+# Essential dependencies
+python-dotenv==1.0.0
