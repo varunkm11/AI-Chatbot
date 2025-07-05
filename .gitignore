@@ -57,3 +57,4 @@ Thumbs.db
 
 # Heroku
 .heroku/
+.vercel

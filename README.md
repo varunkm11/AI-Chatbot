@@ -202,13 +202,17 @@ This information is automatically included in conversations to provide current c
 ```
 AI-Chatbot/
 ├── app.py                 # Main Flask application
+├── api/
+│   └── index.py          # Vercel entry point
 ├── templates/
 │   └── index.html        # Chat interface
 ├── requirements.txt      # Python dependencies
+├── vercel.json          # Vercel deployment configuration
 ├── Procfile             # Heroku process file
 ├── runtime.txt          # Python version for Heroku
 ├── .env.example         # Environment variables template
 ├── .gitignore          # Git ignore rules
+├── LICENSE             # MIT License
 └── README.md           # This file
 ```
 
@@ -269,7 +273,18 @@ app.run(host='0.0.0.0', port=port, debug=True)  # Set debug=True
 
 ## License
 
-This project is open source and available under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### MIT License Summary
+
+- ✅ **Commercial use** - You can use this project commercially
+- ✅ **Modification** - You can modify the code
+- ✅ **Distribution** - You can distribute the code
+- ✅ **Private use** - You can use it privately
+- ⚠️ **Liability** - Authors are not liable for damages
+- ⚠️ **Warranty** - No warranty is provided
+
+Copyright (c) 2025 Roseew AI Chatbot
 
 ## Support
 
