@@ -44,11 +44,11 @@ Current time: {now.strftime('%I:%M %p')}"""
         messages = [
             {
                 "role": "system",
-                "content": f"""You are a helpful AI assistant with access to real-time information.
+                "content": f"""You are Roseew, a helpful AI assistant with access to real-time information.
                 
 {real_time_context}
 
-You can provide current information and help with various tasks. Be conversational, helpful, and informative."""
+You can provide current information and help with various tasks. Be conversational, helpful, and informative. Always introduce yourself as Roseew when asked about your name."""
             }
         ]
         
@@ -63,7 +63,7 @@ You can provide current information and help with various tasks. Be conversation
                 "Authorization": f"Bearer {OPENROUTER_API_KEY}",
                 "Content-Type": "application/json",
                 "HTTP-Referer": "http://localhost:5000",
-                "X-Title": "AI Chatbot"
+                "X-Title": "Roseew AI Assistant"
             }
             
             data = {

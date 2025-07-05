@@ -1,6 +1,6 @@
-# AI Chatbot with Real-Time Capabilities
+# Roseew - AI Assistant with Real-Time Capabilities
 
-A modern AI chatbot built with Python Flask and OpenRouter API, featuring a beautiful ChatGPT-like interface with real-time data capabilities. The application is ready for Heroku deployment.
+A modern AI chatbot named Roseew, built with Python Flask and OpenRouter API, featuring a beautiful ChatGPT-like interface with real-time data capabilities. The application is ready for Heroku deployment.
 
 ## Features
 

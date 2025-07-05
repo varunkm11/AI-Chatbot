@@ -15,8 +15,8 @@ INCLUDE_DATE = True  # Include current date in AI context
 TIMEZONE = "UTC"  # Default timezone for timestamps
 
 # UI Configuration
-CHAT_TITLE = "AI Assistant"  # Title shown in header
-WELCOME_MESSAGE = """Hello! I'm your AI assistant with real-time capabilities. 
+CHAT_TITLE = "Roseew"  # Title shown in header
+WELCOME_MESSAGE = """Hello! I'm Roseew, your AI assistant with real-time capabilities. 
 I can help you with questions, provide current information, and assist with various tasks. 
 How can I help you today?"""
 
