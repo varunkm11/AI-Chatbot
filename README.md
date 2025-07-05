@@ -4,7 +4,7 @@ A modern AI chatbot named Roseew, built with Python Flask and OpenRouter API, fe
 
 ## 🌟 Live Demo
 
-**🚀 [Try Roseew Live](https://roseew-ai-chatbot-boq0po5an.vercel.app)**
+**🚀 [Try Roseew Live](https://roseew-ai-chatbot.vercel.app/)**
 
 Experience the chatbot in action! The live demo is deployed on Vercel and ready to use.
 
@@ -315,7 +315,7 @@ Copyright (c) 2025 Roseew AI Chatbot
 
 **Varun Kumar Singh**
 
-- 🌐 **Live Demo**: [https://roseew-ai-chatbot-boq0po5an.vercel.app](https://roseew-ai-chatbot-boq0po5an.vercel.app)
+- 🌐 **Live Demo**: [https://roseew-ai-chatbot-boq0po5an.vercel.app](https://roseew-ai-chatbot.vercel.app/)
 - 📧 **Email**: [varunkumarsingh818@gmail.com](mailto:varunkumarsingh818@gmail.com)
 - 💼 **GitHub**: [@varunkm11](https://github.com/varunkm11)
 - 🚀 **Project**: Roseew AI Chatbot - Advanced conversational AI with real-time capabilities
@@ -348,9 +348,15 @@ Potential improvements:
 
 ### 🤖 Roseew AI Chatbot
 
-**Developed with ❤️ by [Varun Kumar Singh](https://github.com/varunkm11)**
+<div align="center">
 
-[🚀 Live Demo](https://roseew-ai-chatbot-boq0po5an.vercel.app) • [📧 Contact](mailto:varunkumarsingh818@gmail.com) • [⭐ Star on GitHub](https://github.com/varunkm11/AI-Chatbot)
+**Developed with ❤️ by Varun Kumar Singh**
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/varunkm11)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/varun-kumar-singh-267951269/)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:varunkumarsingh818@gmail.com)
+
+</div>
 
 *Advanced AI Assistant with Real-Time Capabilities*
 
