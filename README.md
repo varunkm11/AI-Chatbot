@@ -2,6 +2,12 @@
 
 A modern AI chatbot named Roseew, built with Python Flask and OpenRouter API, featuring a beautiful ChatGPT-like interface with real-time data capabilities. The application is ready for Heroku deployment.
 
+## 🌟 Live Demo
+
+**🚀 [Try Roseew Live](https://roseew-ai-chatbot-boq0po5an.vercel.app)**
+
+Experience the chatbot in action! The live demo is deployed on Vercel and ready to use.
+
 ## Features
 
 - 🤖 **AI-powered conversations** using OpenRouter API
@@ -10,7 +16,7 @@ A modern AI chatbot named Roseew, built with Python Flask and OpenRouter API, fe
 - 📱 **Responsive design** that works on all devices
 - 🔄 **Conversation memory** maintains context within sessions
 - ⚡ **Fast and lightweight** Flask backend
-- 🚀 **Heroku-ready deployment** configuration
+- 🚀 **Vercel & Heroku ready** deployment configuration
 
 ## Screenshots
 
@@ -27,7 +33,7 @@ The interface features:
 - **Backend**: Python Flask
 - **AI API**: OpenRouter (supports multiple AI models)
 - **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
-- **Deployment**: Heroku
+- **Deployment**: Vercel & Heroku
 - **Styling**: Custom CSS with ChatGPT-inspired design
 
 ## Setup Instructions
@@ -286,12 +292,26 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Copyright (c) 2025 Roseew AI Chatbot
 
+## 👨‍💻 Developer
+
+**Varun Kumar Singh**
+
+- 🌐 **Live Demo**: [https://roseew-ai-chatbot-boq0po5an.vercel.app](https://roseew-ai-chatbot-boq0po5an.vercel.app)
+- 📧 **Email**: [varunkumarsingh818@gmail.com](mailto:varunkumarsingh818@gmail.com)
+- 💼 **GitHub**: [@varunkm11](https://github.com/varunkm11)
+- 🚀 **Project**: Roseew AI Chatbot - Advanced conversational AI with real-time capabilities
+
+*Passionate full-stack developer creating innovative AI solutions and modern web applications.*
+
 ## Support
 
 For issues and questions:
 1. Check the troubleshooting section
-2. Review Heroku logs for deployment issues
+2. Review deployment logs for any issues
 3. Ensure all environment variables are configured correctly
+4. Contact the developer: [varunkumarsingh818@gmail.com](mailto:varunkumarsingh818@gmail.com)
+
+**Live Demo**: [https://roseew-ai-chatbot-boq0po5an.vercel.app](https://roseew-ai-chatbot-boq0po5an.vercel.app)
 
 ## Future Enhancements
 
@@ -302,3 +322,17 @@ Potential improvements:
 - Multiple AI model selection in UI
 - Chat export functionality
 - Custom theme options
+
+---
+
+<div align="center">
+
+### 🤖 Roseew AI Chatbot
+
+**Developed with ❤️ by [Varun Kumar Singh](https://github.com/varunkm11)**
+
+[🚀 Live Demo](https://roseew-ai-chatbot-boq0po5an.vercel.app) • [📧 Contact](mailto:varunkumarsingh818@gmail.com) • [⭐ Star on GitHub](https://github.com/varunkm11/AI-Chatbot)
+
+*Advanced AI Assistant with Real-Time Capabilities*
+
+</div>
