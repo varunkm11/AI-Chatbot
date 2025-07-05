@@ -25,7 +25,7 @@ Experience the chatbot in action! The live demo is deployed on Vercel and ready 
 ## 📸 Screenshots
 
 ### 🖥️ Desktop Interface
-![Roseew AI Chatbot Desktop](bot_preview.png)
+![Roseew AI Chatbot Desktop](screenshots/bot_preview.png)
 *Full desktop experience with sidebar navigation and real-time chat*
 
 
