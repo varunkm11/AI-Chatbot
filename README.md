@@ -72,7 +72,61 @@ python app.py
 
 The application will be available at `http://localhost:5000`
 
-## Heroku Deployment
+## Vercel Deployment (Recommended)
+
+### Prerequisites
+
+1. Install [Vercel CLI](https://vercel.com/cli) globally:
+```bash
+npm i -g vercel
+```
+
+2. Create a Vercel account at [vercel.com](https://vercel.com)
+
+### Deployment Steps
+
+1. **Login to Vercel**:
+```bash
+vercel login
+```
+
+2. **Deploy from your project directory**:
+```bash
+vercel
+```
+
+3. **Follow the prompts**:
+   - Set up and deploy? **Y**
+   - Which scope? Choose your account
+   - Link to existing project? **N** (for first deployment)
+   - What's your project's name? **roseew-ai-chatbot**
+   - In which directory is your code located? **./**
+
+4. **Set Environment Variables** (during setup or later):
+```bash
+vercel env add OPENROUTER_API_KEY
+vercel env add SECRET_KEY
+```
+
+5. **Deploy to production**:
+```bash
+vercel --prod
+```
+
+Your app will be live at a URL like: `https://roseew-ai-chatbot.vercel.app`
+
+### Environment Variables Setup
+
+After deployment, add your environment variables:
+
+1. Go to your [Vercel Dashboard](https://vercel.com/dashboard)
+2. Select your project
+3. Go to **Settings** → **Environment Variables**
+4. Add:
+   - `OPENROUTER_API_KEY`: Your OpenRouter API key
+   - `SECRET_KEY`: A secure random string
+
+## Heroku Deployment (Alternative)
 
 ### Prerequisites
 
