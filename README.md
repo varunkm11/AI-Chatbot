@@ -1,6 +1,6 @@
 # Roseew - AI Assistant with Real-Time Capabilities
 
-A modern AI chatbot named Roseew, built with Python Flask and OpenRouter API, featuring a beautiful ChatGPT-like interface with real-time data capabilities. The application is ready for Heroku deployment.
+A modern AI chatbot named Roseew, built with Python Flask and OpenRouter API, featuring a beautiful ChatGPT-like interface with real-time data capabilities. Deployed on Vercel for fast and reliable performance.
 
 ## 🌟 Live Demo
 
@@ -16,7 +16,11 @@ Experience the chatbot in action! The live demo is deployed on Vercel and ready 
 - 📱 **Responsive design** that works on all devices
 - 🔄 **Conversation memory** maintains context within sessions
 - ⚡ **Fast and lightweight** Flask backend
-- 🚀 **Vercel & Heroku ready** deployment configuration
+- 🚀 **Vercel deployment ready** configuration
+
+## 🔧 Quick Tech Overview
+
+**Frontend**: HTML5 + CSS3 + Vanilla JavaScript | **Backend**: Python Flask | **AI**: OpenRouter API (Claude 3.5 Sonnet) | **Deployment**: Vercel
 
 ## Screenshots
 
@@ -28,13 +32,60 @@ The interface features:
 - Smooth animations and transitions
 - Mobile-responsive layout
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- **Backend**: Python Flask
-- **AI API**: OpenRouter (supports multiple AI models)
-- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
-- **Deployment**: Vercel & Heroku
-- **Styling**: Custom CSS with ChatGPT-inspired design
+### Frontend Technologies
+- **HTML5** - Semantic markup and structure
+- **CSS3** - Modern styling with:
+  - Flexbox layout system
+  - CSS Grid for responsive design
+  - Custom animations and transitions
+  - Dark theme with CSS variables
+  - Webkit scrollbar customization
+- **Vanilla JavaScript (ES6+)** - Interactive functionality:
+  - Async/await for API calls
+  - DOM manipulation
+  - Real-time message handling
+  - Auto-resizing textarea
+  - Keyboard event handling
+- **Font Awesome 6.4.0** - Professional icons and symbols
+- **Responsive Design** - Mobile-first approach with media queries
+
+### Backend Technologies
+- **Python 3.11+** - Core programming language
+- **Flask 2.3.3** - Lightweight web framework
+- **Requests 2.31.0** - HTTP library for API calls
+- **Python-dotenv 1.0.0** - Environment variable management
+- **Gunicorn 21.2.0** - WSGI HTTP Server for deployment
+
+### AI & External Services
+- **OpenRouter API** - AI model access gateway
+- **Anthropic Claude 3.5 Sonnet** - Primary AI model
+- **Multiple AI Models Support**:
+  - OpenAI GPT-4 Turbo
+  - OpenAI GPT-3.5 Turbo
+  - Anthropic Claude 3 Opus
+  - Google Gemini Pro
+  - And many more via OpenRouter
+
+### Development & Deployment
+- **Git** - Version control system
+- **Vercel** - Primary deployment platform
+- **Vercel CLI** - Deployment and management tools
+- **Node.js & NPM** - Package management for deployment tools
+
+### Architecture & Patterns
+- **RESTful API Design** - Clean endpoint structure
+- **Session Management** - Flask sessions for conversation state
+- **Environment Configuration** - Secure API key management
+- **MVC Pattern** - Separation of concerns
+- **Real-time Communication** - AJAX for seamless user experience
+
+### Security Features
+- **Environment Variables** - Secure API key storage
+- **CORS Handling** - Cross-origin request management
+- **Input Validation** - Server-side request validation
+- **Error Handling** - Comprehensive error management
 
 ## Setup Instructions
 
@@ -78,7 +129,7 @@ python app.py
 
 The application will be available at `http://localhost:5000`
 
-## Vercel Deployment (Recommended)
+## Vercel Deployment
 
 ### Prerequisites
 
@@ -132,43 +183,6 @@ After deployment, add your environment variables:
    - `OPENROUTER_API_KEY`: Your OpenRouter API key
    - `SECRET_KEY`: A secure random string
 
-## Heroku Deployment (Alternative)
-
-### Prerequisites
-
-1. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
-2. Create a Heroku account
-
-### Deployment Steps
-
-1. **Login to Heroku**:
-```bash
-heroku login
-```
-
-2. **Create Heroku App**:
-```bash
-heroku create your-chatbot-name
-```
-
-3. **Set Environment Variables**:
-```bash
-heroku config:set OPENROUTER_API_KEY=your_openrouter_api_key_here
-heroku config:set SECRET_KEY=your_secret_key_here
-```
-
-4. **Deploy**:
-```bash
-git add .
-git commit -m "Initial deployment"
-git push heroku main
-```
-
-5. **Open App**:
-```bash
-heroku open
-```
-
 ## Configuration
 
 ### AI Model Selection
@@ -214,8 +228,6 @@ AI-Chatbot/
 │   └── index.html        # Chat interface
 ├── requirements.txt      # Python dependencies
 ├── vercel.json          # Vercel deployment configuration
-├── Procfile             # Heroku process file
-├── runtime.txt          # Python version for Heroku
 ├── .env.example         # Environment variables template
 ├── .gitignore          # Git ignore rules
 ├── LICENSE             # MIT License
@@ -252,10 +264,10 @@ AI-Chatbot/
    - Ensure your OpenRouter API key is valid
    - Check that the environment variable is set correctly
 
-2. **Heroku Deployment Fails**:
+2. **Vercel Deployment Fails**:
    - Verify all files are committed to git
-   - Check Heroku logs: `heroku logs --tail`
-   - Ensure environment variables are set on Heroku
+   - Check Vercel deployment logs in dashboard
+   - Ensure environment variables are set on Vercel
 
 3. **Local Development Issues**:
    - Make sure all dependencies are installed
