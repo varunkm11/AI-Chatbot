@@ -1,31 +1,9 @@
-# Core dependencies
-streamlit>=1.28.0
-fastapi>=0.104.0
-uvicorn>=0.24.0
-requests>=2.31.0
-pydantic>=2.5.0
-flask>=2.3.0
-flask-cors>=4.0.0
-
-# Real-time data dependencies
-yfinance>=0.2.18
-feedparser>=6.0.10
-wikipedia>=1.4.0
-pytz>=2023.3
-
-# Additional dependencies for advanced features
-websockets>=11.0.0
-python-multipart>=0.0.6
-aiofiles>=23.2.1
-
-# Optional dependencies for enhanced functionality
-python-dotenv>=1.0.0
-redis>=5.0.0
-sqlalchemy>=2.0.0
-alembic>=1.12.0
-
-# Development dependencies
-pytest>=7.4.0
-black>=23.0.0
-flake8>=6.0.0
-mypy>=1.6.0
+fastapi==0.104.1
+uvicorn==0.24.0
+websockets==12.0
+python-dotenv==1.0.0
+openai==1.3.8
+aiofiles==23.2.1
+jinja2==3.1.2
+python-multipart==0.0.6
+pydantic==2.5.0
