@@ -22,15 +22,22 @@ Experience the chatbot in action! The live demo is deployed on Vercel and ready 
 
 **Frontend**: HTML5 + CSS3 + Vanilla JavaScript | **Backend**: Python Flask | **AI**: OpenRouter API (Claude 3.5 Sonnet) | **Deployment**: Vercel
 
-## Screenshots
+## 📸 Screenshots
 
-The interface features:
-- Clean, minimalist design with black and gray color scheme
-- Sidebar for chat history and new chat creation
-- Real-time typing indicators
-- Message timestamps
-- Smooth animations and transitions
-- Mobile-responsive layout
+### 🖥️ Desktop Interface
+![Roseew AI Chatbot Desktop](bot_preview.png)
+*Full desktop experience with sidebar navigation and real-time chat*
+
+
+### ✨ Key Interface Features:
+- 🎨 **Modern Dark Theme** - Black (#0d1117) and gray (#161b22) color scheme
+- � **Collapsible Sidebar** - Chat history and new conversation management
+- ⚡ **Real-time Typing Indicators** - "Roseew is thinking..." animation
+- 🕐 **Message Timestamps** - Track conversation timeline precisely
+- ✨ **Smooth Animations** - Professional transitions and hover effects
+- 📱 **Fully Responsive** - Optimized for desktop, tablet, and mobile
+- 🎯 **ChatGPT-inspired UI** - Familiar and intuitive user experience
+
 
 ## 🛠️ Tech Stack
 
