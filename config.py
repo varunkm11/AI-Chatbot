@@ -12,7 +12,7 @@ CONVERSATION_TIMEOUT = 3600  # Session timeout in seconds (1 hour)
 # Real-time Features
 INCLUDE_TIMESTAMP = True  # Include current time in AI context
 INCLUDE_DATE = True  # Include current date in AI context
-TIMEZONE = "UTC"  # Default timezone for timestamps
+TIMEZONE = "Asia/Kolkata"  # Default timezone for timestamps
 
 # UI Configuration
 CHAT_TITLE = "Roseew"  # Title shown in header

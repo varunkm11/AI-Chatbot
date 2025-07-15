@@ -3,6 +3,7 @@ import requests
 import json
 from flask import Flask, render_template, request, jsonify, session
 from datetime import datetime
+import pytz
 import uuid
 from dotenv import load_dotenv
 from config import *
@@ -23,10 +24,11 @@ class ChatBot:
     
     def get_real_time_context(self):
         """Get real-time context information"""
-        now = datetime.now()
+        tz = pytz.timezone(TIMEZONE)
+        now = datetime.now(tz)
         return f"""Current date and time: {now.strftime('%Y-%m-%d %H:%M:%S')}
 Today is {now.strftime('%A, %B %d, %Y')}
-Current time: {now.strftime('%I:%M %p')}"""
+Current time: {now.strftime('%I:%M %p')} ({TIMEZONE})"""
     
     def get_ai_response(self, message, conversation_id):
         """Get response from OpenRouter AI"""
@@ -121,9 +123,11 @@ def chat():
         # Get AI response
         response = chatbot.get_ai_response(message, conversation_id)
         
+        tz = pytz.timezone(TIMEZONE)
+        now = datetime.now(tz)
         return jsonify({
             'response': response,
-            'timestamp': datetime.now().strftime('%H:%M')
+            'timestamp': now.strftime('%H:%M')
         })
         
     except Exception as e:
@@ -138,7 +142,9 @@ def new_chat():
 @app.route('/health')
 def health():
     """Health check endpoint for Heroku"""
-    return jsonify({'status': 'healthy', 'timestamp': datetime.now().isoformat()})
+    tz = pytz.timezone(TIMEZONE)
+    now = datetime.now(tz)
+    return jsonify({'status': 'healthy', 'timestamp': now.isoformat()})
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
