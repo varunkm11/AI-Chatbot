@@ -13,9 +13,9 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #0d1117;
-            color: #e6edf3;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #e0e0e0;
             height: 100vh;
             overflow: hidden;
         }
@@ -27,14 +27,14 @@
 
         /* Sidebar */
         .sidebar {
-            width: 260px;
-            background-color: #161b22;
-            border-right: 1px solid #30363d;
+            width: 280px;
+            background: linear-gradient(180deg, #262626 0%, #1f1f1f 100%);
+            border-right: 1px solid #404040;
             display: flex;
             flex-direction: column;
-            padding: 12px;
-            transition: all 0.3s ease;
-            overflow: hidden;
+            padding: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
         }
 
         .sidebar.collapsed {
@@ -43,60 +43,210 @@
             border-right: none;
         }
 
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #404040;
+        }
+
+        .logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .app-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #f5f5f5;
+        }
+
         .new-chat-btn {
-            background: linear-gradient(135deg, #238636, #2ea043);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin-bottom: 16px;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.2s ease;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
 
         .new-chat-btn:hover {
-            background: linear-gradient(135deg, #2ea043, #238636);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
         }
 
-        .sidebar-header {
-            color: #7d8590;
+        .model-selector {
+            margin-bottom: 20px;
+        }
+
+        .model-label {
+            color: #a0a0a0;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .model-select {
+            width: 100%;
+            background: #333333;
+            border: 1px solid #404040;
+            border-radius: 8px;
+            padding: 10px 12px;
+            color: #e0e0e0;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .model-select:hover {
+            border-color: #6366f1;
+        }
+
+        .model-select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .section-title {
+            color: #a0a0a0;
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 8px;
-            padding: 0 8px;
+            margin-bottom: 12px;
+            padding: 0 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-all-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            border-radius: 4px;
+            padding: 4px 6px;
+            cursor: pointer;
+            font-size: 10px;
+            transition: all 0.2s ease;
+            opacity: 0.7;
+        }
+
+        .delete-all-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            opacity: 1;
+            transform: scale(1.05);
         }
 
         .chat-history {
             flex: 1;
             overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #404040 transparent;
+        }
+
+        .chat-history::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-history::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-history::-webkit-scrollbar-thumb {
+            background: #404040;
+            border-radius: 3px;
         }
 
         .chat-item {
-            background-color: #21262d;
-            border-radius: 6px;
-            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 14px;
             margin-bottom: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
             border: 1px solid transparent;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
         }
 
         .chat-item:hover {
-            background-color: #30363d;
-            border-color: #484f58;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #6366f1;
+            transform: translateX(4px);
         }
 
         .chat-item.active {
-            background-color: #1f6feb;
-            border-color: #1f6feb;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border-color: #6366f1;
+        }
+
+        .chat-item[style*="cursor: default"] {
+            cursor: default !important;
+        }
+
+        .chat-item[style*="cursor: default"]:hover {
+            transform: none !important;
+            border-color: transparent !important;
+        }
+
+        .chat-item-content {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .chat-item-actions {
+            opacity: 0;
+            transition: all 0.2s ease;
+            margin-left: 8px;
+        }
+
+        .chat-item:hover .chat-item-actions {
+            opacity: 1;
+        }
+
+        .delete-chat-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            border-radius: 6px;
+            padding: 6px 8px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .delete-chat-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            transform: scale(1.05);
         }
 
         /* Main Chat Area */
@@ -104,20 +254,340 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
         }
 
         .header {
-            background-color: #161b22;
-            border-bottom: 1px solid #30363d;
-            padding: 16px 24px;
+            background: rgba(38, 38, 38, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #404040;
+            padding: 20px 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .header-left {
             display: flex;
             align-items: center;
+            gap: 16px;
+        }
+
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            color: #a0a0a0;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #f5f5f5;
+            margin: 0;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #404040;
+            color: #e0e0e0;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .header-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #6366f1;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            scrollbar-width: thin;
+            scrollbar-color: #404040 transparent;
+        }
+
+        .messages-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .messages-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .messages-container::-webkit-scrollbar-thumb {
+            background: #404040;
+            border-radius: 4px;
+        }
+
+        .message {
+            margin-bottom: 24px;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-user {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .message-ai {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            max-width: 80%;
+            padding: 16px 20px;
+            border-radius: 18px;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-user .message-content {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-ai .message-content {
+            background: rgba(255, 255, 255, 0.08);
+            color: #e0e0e0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom-left-radius: 4px;
+            backdrop-filter: blur(10px);
+        }
+
+        .message-meta {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+            text-align: right;
+        }
+
+        .message-ai .message-meta {
+            text-align: left;
+        }
+
+        /* Input Area */
+        .input-area {
+            background: rgba(38, 38, 38, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid #404040;
+            padding: 20px 28px;
+        }
+
+        .input-container {
+            position: relative;
+            max-width: 100%;
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+        }
+
+        .message-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid #404040;
+            border-radius: 16px;
+            padding: 16px 20px;
+            color: #e0e0e0;
+            font-size: 15px;
+            font-family: inherit;
+            resize: none;
+            outline: none;
+            transition: all 0.3s ease;
+            min-height: 52px;
+            max-height: 120px;
+            line-height: 1.4;
+        }
+
+        .message-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .message-input::placeholder {
+            color: #888;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            color: white;
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .send-btn:active {
+            transform: scale(0.95);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Loading and Error States */
+        .typing-indicator {
+            display: none;
+            padding: 20px 28px;
+            align-items: center;
+            gap: 12px;
+            color: #a0a0a0;
+            font-size: 14px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+            margin-left: 8px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #6366f1;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        .typing-dot:nth-child(3) { animation-delay: 0s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateX(100%); }
+            15% { opacity: 1; transform: translateX(0); }
+            85% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(100%); }
+        }
+
+        .error-message {
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 12px 20px;
+            margin: 0 28px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                z-index: 1000;
+                height: 100vh;
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                width: 100%;
+            }
+
+            .header {
+                padding: 16px 20px;
+            }
+
+            .messages-container {
+                padding: 16px 20px;
+            }
+
+            .input-area {
+                padding: 16px 20px;
+            }
+
+            .message-content {
+                max-width: 90%;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #404040;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a4a4a;
+        }
             gap: 16px;
         }
 
@@ -279,10 +749,8 @@
         }
 
         .send-btn {
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
+            position: relative;
+            margin-top: 12px;
             background: linear-gradient(135deg, #238636, #2ea043);
             color: white;
             border: none;
@@ -389,18 +857,39 @@
 <body>
     <div class="container">
         <!-- Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">R</div>
+                <div>
+                    <div class="app-title">Roseew</div>
+                    <div class="header-subtitle">AI Assistant</div>
+                </div>
+            </div>
+            
             <button class="new-chat-btn" onclick="startNewChat()">
                 <i class="fas fa-plus"></i>
                 New Chat
             </button>
             
-            <div class="sidebar-header">Recent Chats</div>
-            <div class="chat-history">
-                <div class="chat-item active">
-                    <div style="font-weight: 500; margin-bottom: 4px;">Current Chat</div>
-                    <div style="font-size: 12px; color: #7d8590;">Just now</div>
-                </div>
+            <div class="model-selector">
+                <div class="model-label">AI Model</div>
+                <select id="modelSelect" class="model-select">
+                    <option value="gpt-3.5-turbo" selected>GPT-3.5 Turbo</option>
+                    <option value="gpt-4">GPT-4</option>
+                    <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                    <option value="gpt-4o">GPT-4o</option>
+                    <option value="gpt-4o-mini">GPT-4o Mini</option>
+                </select>
+            </div>
+            
+            <div class="section-title">
+                <span>Chat History</span>
+                <button class="delete-all-btn" onclick="deleteAllHistory()" title="Delete all chat history">
+                    <i class="fas fa-trash-can"></i>
+                </button>
+            </div>
+            <div class="chat-history" id="chatHistory">
+                <!-- Chat history will be loaded here -->
             </div>
         </div>
 
@@ -412,66 +901,56 @@
                     <button class="sidebar-toggle" onclick="toggleSidebar()">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <h1>
-                        <i class="fas fa-robot"></i>
-                        Roseew
-                    </h1>
+                    <div>
+                        <div class="header-title">Roseew AI Assistant</div>
+                        <div class="header-subtitle" id="modelStatus">GPT-3.5 Turbo • Ready</div>
+                    </div>
                 </div>
-                <div class="status-indicator">
-                    <div class="status-dot"></div>
-                    Real-time Ready
+                <div class="header-actions">
+                    <button class="header-btn" onclick="clearChat()">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                    <button class="header-btn" onclick="exportChat()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
                 </div>
             </div>
 
             <!-- Chat Container -->
-            <div class="chat-container" id="chatContainer">
-                <div class="message bot">
-                    <div class="message-avatar">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="message-content">
-                        Hello! I'm Roseew, your AI assistant with real-time capabilities. I can help you with questions, provide current information, and assist with various tasks. How can I help you today?
-                        <div class="message-time" id="welcomeTime"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Error Message -->
-            <div class="error-message" id="errorMessage"></div>
-
-            <!-- Typing Indicator -->
-            <div class="typing-indicator" id="typingIndicator">
-                <div class="message-avatar">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div>
-                    Roseew is thinking
-                    <div class="typing-dots">
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
+            <div class="chat-container">
+                <div class="messages-container" id="messagesContainer">
+                    <div class="message message-ai">
+                        <div class="message-content">
+                            Hello! I'm Roseew, your AI assistant with real-time capabilities. I can help you with questions, provide current information, and assist with various tasks. How can I help you today?
+                            <div class="message-meta" id="welcomeTime"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Input Area -->
-            <div class="input-area">
-                <div class="input-container">
-                    <textarea 
-                        id="messageInput" 
-                        class="message-input" 
-                        placeholder="Type your message here... (Press Enter to send, Shift+Enter for new line)"
-                        rows="1"
-                    ></textarea>
-                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
+                <!-- Input Area -->
+                <div class="input-area">
+                    <div class="input-container">
+                        <textarea 
+                            id="messageInput" 
+                            class="message-input" 
+                            placeholder="Type your message here... (Press Enter to send, Shift+Enter for new line)"
+                            rows="1"
+                        ></textarea>
+                        <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
 
     <script>
+        let sidebarCollapsed = false;
+        let currentModel = 'gpt-3.5-turbo';
+        
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             const now = new Date();
@@ -488,12 +967,43 @@
                     sendMessage();
                 }
             });
+            
+            // Handle model change
+            document.getElementById('modelSelect').addEventListener('change', function(e) {
+                currentModel = e.target.value;
+                updateModelStatus();
+                console.log('Model changed to:', currentModel); // Debug log
+            });
+            
+            // Load chat history
+            loadChatHistory();
+            
+            // Update model status
+            updateModelStatus();
         });
+
+        function updateModelStatus() {
+            const modelSelect = document.getElementById('modelSelect');
+            const modelStatus = document.getElementById('modelStatus');
+            const selectedOption = modelSelect.options[modelSelect.selectedIndex];
+            modelStatus.textContent = selectedOption.text + ' • Ready';
+        }
 
         function autoResize() {
             const textarea = document.getElementById('messageInput');
             textarea.style.height = 'auto';
             textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebarCollapsed = !sidebarCollapsed;
+            
+            if (sidebarCollapsed) {
+                sidebar.classList.add('collapsed');
+            } else {
+                sidebar.classList.remove('collapsed');
+            }
         }
 
         async function sendMessage() {
@@ -502,11 +1012,14 @@
             
             if (!message) return;
             
+            // Get selected model
+            const modelSelect = document.getElementById('modelSelect');
+            const selectedModel = modelSelect.value;
+            
             // Clear input and disable send button
             input.value = '';
             autoResize();
             document.getElementById('sendBtn').disabled = true;
-            hideError();
             
             // Add user message to chat
             addMessage(message, 'user');
@@ -520,8 +1033,357 @@
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ message: message })
+                    body: JSON.stringify({ 
+                        message: message,
+                        model: selectedModel 
+                    })
                 });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    hideTyping();
+                    addMessage(data.response, 'ai', data.timestamp);
+                    
+                    // Update chat history after successful message
+                    setTimeout(() => {
+                        loadChatHistory();
+                    }, 500);
+                } else {
+                    hideTyping();
+                    showError(data.error || 'An error occurred');
+                }
+            } catch (error) {
+                hideTyping();
+                showError('Network error. Please try again.');
+                console.error('Error:', error);
+            } finally {
+                document.getElementById('sendBtn').disabled = false;
+            }
+        }
+
+        function addMessage(content, type, timestamp = null) {
+            const container = document.getElementById('messagesContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message message-${type}`;
+            
+            const time = timestamp || new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    ${content.replace(/\n/g, '<br>')}
+                    <div class="message-meta">${time}</div>
+                </div>
+            `;
+            
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function showTyping() {
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typingMessage';
+            typingDiv.className = 'message message-ai';
+            typingDiv.innerHTML = `
+                <div class="message-content" style="background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.3);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span>Roseew is thinking</span>
+                        <div class="typing-dots">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('messagesContainer').appendChild(typingDiv);
+            document.getElementById('messagesContainer').scrollTop = document.getElementById('messagesContainer').scrollHeight;
+        }
+
+        function hideTyping() {
+            const typing = document.getElementById('typingMessage');
+            if (typing) {
+                typing.remove();
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.display = 'block';
+            errorDiv.style.margin = '16px 0';
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+            
+            const container = document.getElementById('messagesContainer');
+            container.appendChild(errorDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function startNewChat() {
+            try {
+                const response = await fetch('/new-chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (response.ok) {
+                    // Clear current chat
+                    const container = document.getElementById('messagesContainer');
+                    container.innerHTML = `
+                        <div class="message message-ai">
+                            <div class="message-content">
+                                Hello! I'm Roseew, your AI assistant with real-time capabilities. I can help you with questions, provide current information, and assist with various tasks. How can I help you today?
+                                <div class="message-meta">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Reload chat history
+                    setTimeout(() => {
+                        loadChatHistory();
+                    }, 500);
+                }
+            } catch (error) {
+                console.error('Error starting new chat:', error);
+            }
+        }
+
+        async function clearChat() {
+            if (confirm('Are you sure you want to clear this chat?')) {
+                try {
+                    await fetch('/delete-history', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    
+                    // Clear UI
+                    const container = document.getElementById('messagesContainer');
+                    container.innerHTML = `
+                        <div class="message message-ai">
+                            <div class="message-content">
+                                Hello! I'm Roseew, your AI assistant with real-time capabilities. I can help you with questions, provide current information, and assist with various tasks. How can I help you today?
+                                <div class="message-meta">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                            </div>
+                        </div>
+                    `;
+                } catch (error) {
+                    console.error('Error clearing chat:', error);
+                }
+            }
+        }
+
+        function exportChat() {
+            const messages = document.querySelectorAll('.message');
+            let chatContent = 'Roseew AI Chat Export\n\n';
+            
+            messages.forEach(message => {
+                const isUser = message.classList.contains('message-user');
+                const content = message.querySelector('.message-content').textContent.trim();
+                const prefix = isUser ? 'You: ' : 'Roseew: ';
+                chatContent += prefix + content + '\n\n';
+            });
+            
+            const blob = new Blob([chatContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `roseew-chat-${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        async function loadChatHistory() {
+            try {
+                const response = await fetch('/history');
+                const data = await response.json();
+                
+                const historyContainer = document.getElementById('chatHistory');
+                historyContainer.innerHTML = '';
+                
+                if (data.sessions && data.sessions.length > 0) {
+                    data.sessions.forEach(session => {
+                        const chatItem = document.createElement('div');
+                        chatItem.className = 'chat-item';
+                        
+                        const timeAgo = getTimeAgo(new Date(session.updated_at));
+                        
+                        chatItem.innerHTML = `
+                            <div class="chat-item-content" onclick="loadSession('${session.id}')">
+                                <div style="font-weight: 500; margin-bottom: 4px; font-size: 14px;">${session.title}</div>
+                                <div style="font-size: 12px; color: #888; opacity: 0.8;">${session.message_count} messages • ${timeAgo}</div>
+                            </div>
+                            <div class="chat-item-actions">
+                                <button class="delete-chat-btn" onclick="deleteChat('${session.id}', event)" title="Delete chat">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                        historyContainer.appendChild(chatItem);
+                    });
+                } else {
+                    const emptyItem = document.createElement('div');
+                    emptyItem.className = 'chat-item';
+                    emptyItem.style.opacity = '0.6';
+                    emptyItem.style.cursor = 'default';
+                    emptyItem.innerHTML = `
+                        <div style="font-size: 13px; color: #888; text-align: center;">No chat history</div>
+                    `;
+                    historyContainer.appendChild(emptyItem);
+                }
+            } catch (error) {
+                console.error('Error loading chat history:', error);
+            }
+        }
+
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diffInSeconds = Math.floor((now - date) / 1000);
+            
+            if (diffInSeconds < 60) return 'Just now';
+            if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
+            if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
+            return `${Math.floor(diffInSeconds / 86400)}d ago`;
+        }
+
+        async function deleteChat(sessionId, event) {
+            // Prevent the chat item click event
+            event.stopPropagation();
+            
+            if (confirm('Are you sure you want to delete this chat? This action cannot be undone.')) {
+                try {
+                    const response = await fetch(`/delete-session/${sessionId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        // If deleted session was current session, start a new chat
+                        const currentSessionId = getCurrentSessionId();
+                        if (currentSessionId === sessionId) {
+                            await startNewChat();
+                        } else {
+                            // Just reload the chat history
+                            loadChatHistory();
+                        }
+                        
+                        showSuccessMessage('Chat deleted successfully');
+                    } else {
+                        const data = await response.json();
+                        showError(data.error || 'Failed to delete chat');
+                    }
+                } catch (error) {
+                    console.error('Error deleting chat:', error);
+                    showError('Network error. Please try again.');
+                }
+            }
+        }
+
+        function getCurrentSessionId() {
+            // This would typically come from session storage or a global variable
+            // For now, we'll return null as a placeholder
+            return null;
+        }
+
+        function showSuccessMessage(message) {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(34, 197, 94, 0.1);
+                border: 1px solid rgba(34, 197, 94, 0.3);
+                color: #22c55e;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 14px;
+                z-index: 1000;
+                animation: fadeInOut 3s ease-in-out forwards;
+            `;
+            successDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            document.body.appendChild(successDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(successDiv);
+            }, 3000);
+        }
+
+        async function deleteAllHistory() {
+            if (confirm('Are you sure you want to delete ALL chat history? This will permanently delete all conversations and cannot be undone.')) {
+                try {
+                    const response = await fetch('/delete-all-history', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        // Clear the current chat
+                        const container = document.getElementById('messagesContainer');
+                        container.innerHTML = `
+                            <div class="message message-ai">
+                                <div class="message-content">
+                                    Hello! I'm Roseew, your AI assistant with real-time capabilities. I can help you with questions, provide current information, and assist with various tasks. How can I help you today?
+                                    <div class="message-meta">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                                </div>
+                            </div>
+                        `;
+                        
+                        // Reload chat history
+                        loadChatHistory();
+                        
+                        showSuccessMessage('All chat history deleted successfully');
+                    } else {
+                        const data = await response.json();
+                        showError(data.error || 'Failed to delete all history');
+                    }
+                } catch (error) {
+                    console.error('Error deleting all history:', error);
+                    showError('Network error. Please try again.');
+                }
+            }
+        }
+
+        async function loadSession(sessionId) {
+            try {
+                const response = await fetch(`/load-session/${sessionId}`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Clear current messages
+                    const container = document.getElementById('messagesContainer');
+                    container.innerHTML = '';
+                    
+                    // Load session messages
+                    data.messages.forEach(msg => {
+                        addMessage(msg.content, msg.role === 'user' ? 'user' : 'ai', 
+                                 new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}));
+                    });
+                    
+                    // Update chat history to highlight active session
+                    loadChatHistory();
+                }
+            } catch (error) {
+                console.error('Error loading session:', error);
+            }
+        }
+
+        // Mobile responsiveness
+        if (window.innerWidth <= 768) {
+            sidebarCollapsed = true;
+            document.getElementById('sidebar').classList.add('collapsed');
+        }
+    </script>
                 
                 const data = await response.json();
                 
