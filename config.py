@@ -35,6 +35,9 @@ AVAILABLE_MODELS = [
     "gpt-4o-mini"
 ]
 
-# Rate Limiting (optional - for future implementation)
-RATE_LIMIT_REQUESTS = 100  # Requests per hour per user
+# Rate Limiting Configuration
+RATE_LIMIT_REQUESTS = 20  # Requests per hour per user (reduced from 100)
 RATE_LIMIT_WINDOW = 3600  # Time window in seconds
+MIN_REQUEST_INTERVAL = 2  # Minimum seconds between requests
+MAX_RETRIES = 3  # Maximum retry attempts for rate limited requests
+BASE_RETRY_DELAY = 1  # Base delay for exponential backoff (seconds)

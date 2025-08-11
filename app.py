@@ -10,6 +10,7 @@ import pytz
 from dotenv import load_dotenv
 from config import *
 from models import db, ChatSession, ChatMessage, UserPreference
+import random
 
 # Load environment variables from .env file
 load_dotenv()
@@ -53,9 +54,9 @@ Today is {now.strftime('%A, %B %d, %Y')}
 Current time: {now.strftime('%I:%M %p')} ({TIMEZONE})"""
     
     def get_ai_response(self, message, session_id, model=None):
-        """Get response from OpenAI API"""
+        """Get response from OpenAI API with retry logic"""
         if not OPENAI_API_KEY:
-            return "Error: OpenAI API key not configured. Please set the OPENAI_API_KEY in config.py."
+            return "Error: OpenAI API key not configured. Please set the OPENAI_API_KEY in .env file."
         
         # Get or create chat session
         chat_session = db.session.get(ChatSession, session_id)
@@ -87,69 +88,95 @@ You can provide current information and help with various tasks. Be conversation
         messages.extend(conversation_history)
         messages.append({"role": "user", "content": message})
         
-        try:
-            headers = {
-                "Authorization": f"Bearer {OPENAI_API_KEY}",
-                "Content-Type": "application/json"
-            }
-            
-            data = {
-                "model": model if model else AI_MODEL,
-                "messages": messages,
-                "temperature": TEMPERATURE,
-                "max_tokens": MAX_TOKENS
-            }
-            
-            response = requests.post(OPENAI_URL, headers=headers, json=data, timeout=30)
-            response.raise_for_status()
-            
-            result = response.json()
-            
-            if 'choices' not in result or not result['choices']:
-                return "Error: Invalid response from AI service"
-            
-            ai_response = result['choices'][0]['message']['content']
-            
-            # Save messages to database
-            user_message = ChatMessage(
-                session_id=session_id,
-                role='user',
-                content=message,
-                model_used=model if model else AI_MODEL
-            )
-            
-            assistant_message = ChatMessage(
-                session_id=session_id,
-                role='assistant',
-                content=ai_response,
-                model_used=model if model else AI_MODEL
-            )
-            
-            db.session.add(user_message)
-            db.session.add(assistant_message)
-            
-            # Update session timestamp
-            chat_session.updated_at = datetime.now()
-            
-            db.session.commit()
-            
-            return ai_response
-            
-        except requests.exceptions.Timeout:
-            return "Error: Request timed out. Please try again."
-        except requests.exceptions.RequestException as e:
-            error_msg = str(e)
-            if "402" in error_msg or "Payment Required" in error_msg:
-                return "⚠️ **Insufficient Credits**: Your OpenAI account needs credits. Please:\n1. Visit https://platform.openai.com/account/billing\n2. Add credits to your account\n\n💡 **Tip**: GPT-3.5-turbo is the most cost-effective option!"
-            elif "401" in error_msg or "Unauthorized" in error_msg:
-                return "🔑 **API Key Error**: Please check your OpenAI API key in config.py."
-            elif "429" in error_msg or "rate limit" in error_msg.lower():
-                return "⏰ **Rate Limited**: Too many requests. Please wait a moment and try again."
-            return f"🌐 **Connection Error**: {error_msg}"
-        except KeyError as e:
-            return f"📝 **Response Error**: Invalid AI service response. Please try again or switch models."
-        except Exception as e:
-            return f"❌ **Unexpected Error**: {str(e)}"
+        # Retry logic for rate limiting
+        max_retries = 3
+        base_delay = 1  # Base delay in seconds
+        
+        for attempt in range(max_retries):
+            try:
+                headers = {
+                    "Authorization": f"Bearer {OPENAI_API_KEY}",
+                    "Content-Type": "application/json"
+                }
+                
+                data = {
+                    "model": model if model else AI_MODEL,
+                    "messages": messages,
+                    "temperature": TEMPERATURE,
+                    "max_tokens": MAX_TOKENS
+                }
+                
+                response = requests.post(OPENAI_URL, headers=headers, json=data, timeout=30)
+                
+                # Handle rate limiting with exponential backoff
+                if response.status_code == 429:
+                    if attempt < max_retries - 1:
+                        # Calculate delay with exponential backoff + jitter
+                        delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
+                        print(f"Rate limited, retrying in {delay:.1f}s (attempt {attempt + 1}/{max_retries})")
+                        time.sleep(delay)
+                        continue
+                    else:
+                        return "⏰ **Rate Limited**: Too many requests. Please wait a few minutes before trying again. Consider:\n\n• Waiting 1-2 minutes between messages\n• Using GPT-3.5-turbo (faster processing)\n• Checking your OpenAI usage limits"
+                
+                response.raise_for_status()
+                
+                result = response.json()
+                
+                if 'choices' not in result or not result['choices']:
+                    return "Error: Invalid response from AI service"
+                
+                ai_response = result['choices'][0]['message']['content']
+                
+                # Save messages to database
+                user_message = ChatMessage(
+                    session_id=session_id,
+                    role='user',
+                    content=message,
+                    model_used=model if model else AI_MODEL
+                )
+                
+                assistant_message = ChatMessage(
+                    session_id=session_id,
+                    role='assistant',
+                    content=ai_response,
+                    model_used=model if model else AI_MODEL
+                )
+                
+                db.session.add(user_message)
+                db.session.add(assistant_message)
+                
+                # Update session timestamp
+                chat_session.updated_at = datetime.now()
+                
+                db.session.commit()
+                
+                return ai_response
+                
+            except requests.exceptions.Timeout:
+                if attempt < max_retries - 1:
+                    time.sleep(2)
+                    continue
+                return "Error: Request timed out after multiple attempts. Please try again."
+            except requests.exceptions.RequestException as e:
+                error_msg = str(e)
+                if "402" in error_msg or "Payment Required" in error_msg:
+                    return "⚠️ **Insufficient Credits**: Your OpenAI account needs credits. Please:\n1. Visit https://platform.openai.com/account/billing\n2. Add credits to your account\n\n💡 **Tip**: GPT-3.5-turbo is the most cost-effective option!"
+                elif "401" in error_msg or "Unauthorized" in error_msg:
+                    return "🔑 **API Key Error**: Please check your OpenAI API key in .env file."
+                elif "429" in error_msg or "rate limit" in error_msg.lower():
+                    if attempt < max_retries - 1:
+                        delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
+                        time.sleep(delay)
+                        continue
+                    return "⏰ **Rate Limited**: Please wait a few minutes before trying again."
+                return f"🌐 **Connection Error**: {error_msg}"
+            except KeyError as e:
+                return f"📝 **Response Error**: Invalid AI service response. Please try again or switch models."
+            except Exception as e:
+                return f"❌ **Unexpected Error**: {str(e)}"
+        
+        return "❌ **Error**: Failed after multiple attempts. Please try again later."
     
     def _generate_title(self, first_message):
         """Generate a title for the chat session based on the first message"""
