@@ -29,16 +29,32 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-# OpenAI configuration
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')  # Load from environment variable only
-OPENAI_URL = "https://api.openai.com/v1/chat/completions"
+# API Configuration based on provider
+API_PROVIDER = os.environ.get('API_PROVIDER', 'openrouter').lower()
+
+if API_PROVIDER == 'openai':
+    API_KEY = os.environ.get('OPENAI_API_KEY')
+    API_URL = "https://api.openai.com/v1/chat/completions"
+    AVAILABLE_MODELS_LIST = AVAILABLE_MODELS.get('openai', [])
+elif API_PROVIDER == 'openrouter':
+    API_KEY = os.environ.get('OPENROUTER_API_KEY')
+    API_URL = "https://openrouter.ai/api/v1/chat/completions"
+    AVAILABLE_MODELS_LIST = AVAILABLE_MODELS.get('openrouter', [])
+elif API_PROVIDER == 'groq':
+    API_KEY = os.environ.get('GROQ_API_KEY')
+    API_URL = "https://api.groq.com/openai/v1/chat/completions"
+    AVAILABLE_MODELS_LIST = AVAILABLE_MODELS.get('groq', [])
+else:
+    API_KEY = os.environ.get('OPENAI_API_KEY')
+    API_URL = "https://api.openai.com/v1/chat/completions"
+    AVAILABLE_MODELS_LIST = AVAILABLE_MODELS.get('openai', [])
 
 # Security check
-if not OPENAI_API_KEY:
-    print("⚠️  WARNING: OPENAI_API_KEY not found in environment variables!")
+if not API_KEY:
+    print(f"⚠️  WARNING: {API_PROVIDER.upper()}_API_KEY not found in environment variables!")
     print("📝 Please set your API key in the .env file")
-elif OPENAI_API_KEY.startswith('your_'):
-    print("⚠️  WARNING: Please replace the placeholder API key in .env file with your actual OpenAI API key")
+elif API_KEY.startswith('your_'):
+    print(f"⚠️  WARNING: Please replace the placeholder API key for {API_PROVIDER.upper()} in .env file")
 
 class ChatBot:
     def __init__(self):
@@ -54,9 +70,9 @@ Today is {now.strftime('%A, %B %d, %Y')}
 Current time: {now.strftime('%I:%M %p')} ({TIMEZONE})"""
     
     def get_ai_response(self, message, session_id, model=None):
-        """Get response from OpenAI API with retry logic"""
-        if not OPENAI_API_KEY:
-            return "Error: OpenAI API key not configured. Please set the OPENAI_API_KEY in .env file."
+        """Get response from AI API with retry logic"""
+        if not API_KEY:
+            return f"Error: {API_PROVIDER.upper()} API key not configured. Please set it in .env file."
         
         # Get or create chat session
         chat_session = db.session.get(ChatSession, session_id)
@@ -70,7 +86,7 @@ Current time: {now.strftime('%I:%M %p')} ({TIMEZONE})"""
         conversation_history = [{'role': msg.role, 'content': msg.content} for msg in messages_query]
         
         real_time_context = self.get_real_time_context()
-        api_used = "OpenAI GPT"
+        api_used = f"{API_PROVIDER.upper()} API"
         
         # Prepare messages
         messages = [
@@ -80,7 +96,7 @@ Current time: {now.strftime('%I:%M %p')} ({TIMEZONE})"""
                 
 {real_time_context}
 
-You can provide current information and help with various tasks. Be conversational, helpful, and informative. Always introduce yourself as Roseew when asked about your name. If asked, tell the user you are using the {api_used} API for responses."""
+You can provide current information and help with various tasks. Be conversational, helpful, and informative. Always introduce yourself as Roseew when asked about your name. If asked, tell the user you are using the {api_used} for responses."""
             }
         ]
         
@@ -95,18 +111,23 @@ You can provide current information and help with various tasks. Be conversation
         for attempt in range(max_retries):
             try:
                 headers = {
-                    "Authorization": f"Bearer {OPENAI_API_KEY}",
+                    "Authorization": f"Bearer {API_KEY}",
                     "Content-Type": "application/json"
                 }
                 
+                # Add OpenRouter specific headers
+                if API_PROVIDER == 'openrouter':
+                    headers["HTTP-Referer"] = "http://localhost:5000"
+                    headers["X-Title"] = "Roseew AI Assistant"
+                
                 data = {
-                    "model": model if model else AI_MODEL,
+                    "model": model if model else (AVAILABLE_MODELS_LIST[0] if AVAILABLE_MODELS_LIST else AI_MODEL),
                     "messages": messages,
                     "temperature": TEMPERATURE,
                     "max_tokens": MAX_TOKENS
                 }
                 
-                response = requests.post(OPENAI_URL, headers=headers, json=data, timeout=30)
+                response = requests.post(API_URL, headers=headers, json=data, timeout=30)
                 
                 # Handle rate limiting with exponential backoff
                 if response.status_code == 429:
@@ -117,7 +138,10 @@ You can provide current information and help with various tasks. Be conversation
                         time.sleep(delay)
                         continue
                     else:
-                        return "⏰ **Rate Limited**: Too many requests. Please wait a few minutes before trying again. Consider:\n\n• Waiting 1-2 minutes between messages\n• Using GPT-3.5-turbo (faster processing)\n• Checking your OpenAI usage limits"
+                        if API_PROVIDER == 'openrouter':
+                            return "⏰ **Rate Limited**: Switch to free models like 'Llama 3.1 8B (Free)' or wait a few minutes."
+                        else:
+                            return "⏰ **Rate Limited**: Too many requests. Consider switching to OpenRouter for better limits."
                 
                 response.raise_for_status()
                 
@@ -133,14 +157,14 @@ You can provide current information and help with various tasks. Be conversation
                     session_id=session_id,
                     role='user',
                     content=message,
-                    model_used=model if model else AI_MODEL
+                    model_used=model if model else (AVAILABLE_MODELS_LIST[0] if AVAILABLE_MODELS_LIST else AI_MODEL)
                 )
                 
                 assistant_message = ChatMessage(
                     session_id=session_id,
                     role='assistant',
                     content=ai_response,
-                    model_used=model if model else AI_MODEL
+                    model_used=model if model else (AVAILABLE_MODELS_LIST[0] if AVAILABLE_MODELS_LIST else AI_MODEL)
                 )
                 
                 db.session.add(user_message)
@@ -161,9 +185,9 @@ You can provide current information and help with various tasks. Be conversation
             except requests.exceptions.RequestException as e:
                 error_msg = str(e)
                 if "402" in error_msg or "Payment Required" in error_msg:
-                    return "⚠️ **Insufficient Credits**: Your OpenAI account needs credits. Please:\n1. Visit https://platform.openai.com/account/billing\n2. Add credits to your account\n\n💡 **Tip**: GPT-3.5-turbo is the most cost-effective option!"
+                    return f"⚠️ **Insufficient Credits**: Your {API_PROVIDER.upper()} account needs credits. Add credits to your account."
                 elif "401" in error_msg or "Unauthorized" in error_msg:
-                    return "🔑 **API Key Error**: Please check your OpenAI API key in .env file."
+                    return f"🔑 **API Key Error**: Please check your {API_PROVIDER.upper()} API key in .env file."
                 elif "429" in error_msg or "rate limit" in error_msg.lower():
                     if attempt < max_retries - 1:
                         delay = base_delay * (2 ** attempt) + random.uniform(0, 1)
