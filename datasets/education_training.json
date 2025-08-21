@@ -1,0 +1,27 @@
+[
+  {
+    "input": "What is machine learning?",
+    "output": "Machine learning is a subset of artificial intelligence that enables computers to learn and improve from experience without being explicitly programmed. It uses algorithms to analyze data, identify patterns, and make predictions or decisions.",
+    "category": "education"
+  },
+  {
+    "input": "Explain photosynthesis",
+    "output": "Photosynthesis is the process by which plants use sunlight, water, and carbon dioxide to produce glucose and oxygen. It occurs in chloroplasts and is essential for life on Earth as it produces oxygen and serves as the base of most food chains.",
+    "category": "education"
+  },
+  {
+    "input": "What is the water cycle?",
+    "output": "The water cycle is the continuous movement of water on, above, and below Earth's surface. It includes evaporation, condensation, precipitation, and collection, driven by solar energy and gravity.",
+    "category": "education"
+  },
+  {
+    "input": "How do you solve quadratic equations?",
+    "output": "Quadratic equations (ax² + bx + c = 0) can be solved using: 1) Factoring, 2) Completing the square, 3) The quadratic formula: x = (-b ± √(b²-4ac)) / 2a, or 4) Graphing.",
+    "category": "education"
+  },
+  {
+    "input": "What is climate change?",
+    "output": "Climate change refers to long-term shifts in global temperatures and weather patterns. While climate variations are natural, scientific evidence shows that human activities, particularly greenhouse gas emissions, are the primary driver of current climate change.",
+    "category": "education"
+  }
+]

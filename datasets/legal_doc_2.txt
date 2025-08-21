@@ -1,0 +1,4 @@
+Title: Court System Overview
+Category: legal_docs
+Content:
+Court systems typically have multiple levels including trial courts, appellate courts, and supreme courts. Each level has specific jurisdiction and procedures. Understanding court hierarchy is essential for legal proceedings and appeals.

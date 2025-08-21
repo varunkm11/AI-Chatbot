@@ -1,0 +1,27 @@
+[
+  {
+    "input": "What is intellectual property?",
+    "output": "Intellectual property (IP) refers to creations of the mind, such as inventions, literary works, designs, and symbols used in commerce. It includes patents, trademarks, copyrights, and trade secrets, which can be legally protected.",
+    "category": "legal"
+  },
+  {
+    "input": "What is a contract?",
+    "output": "A contract is a legally binding agreement between two or more parties that creates obligations enforceable by law. It requires offer, acceptance, consideration, legal capacity, and lawful purpose to be valid.",
+    "category": "legal"
+  },
+  {
+    "input": "What are employment rights?",
+    "output": "Employment rights include fair wages, safe working conditions, protection from discrimination, right to organize, reasonable working hours, and protection from wrongful termination. These vary by jurisdiction and may be governed by labor laws.",
+    "category": "legal"
+  },
+  {
+    "input": "What is data protection law?",
+    "output": "Data protection laws govern how personal information is collected, processed, stored, and shared. Examples include GDPR in Europe and CCPA in California. These laws give individuals rights over their personal data and impose obligations on organizations.",
+    "category": "legal"
+  },
+  {
+    "input": "What is due process?",
+    "output": "Due process is a fundamental legal principle ensuring fair treatment through the judicial system. It includes the right to a fair hearing, legal representation, presumption of innocence, and protection from arbitrary government action.",
+    "category": "legal"
+  }
+]

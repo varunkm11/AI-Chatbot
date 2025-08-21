@@ -1,0 +1,4 @@
+Title: Data Privacy and Security
+Category: technology_docs
+Content:
+Data privacy involves protecting personal information from unauthorized access. Key principles include data minimization, consent, transparency, security measures like encryption, regular audits, and compliance with regulations like GDPR.

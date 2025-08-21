@@ -1,0 +1,4 @@
+Title: Scientific Method Overview
+Category: education_docs
+Content:
+The scientific method is a systematic approach to understanding the natural world. It involves observation, hypothesis formation, experimentation, data analysis, and conclusion drawing. Peer review and replication are crucial for validating results.

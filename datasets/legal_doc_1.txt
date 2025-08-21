@@ -1,0 +1,4 @@
+Title: Legal Research Methods
+Category: legal_docs
+Content:
+Legal research involves finding and analyzing legal authorities such as statutes, case law, regulations, and secondary sources. Key steps include identifying legal issues, finding relevant sources, analyzing authorities, and applying law to facts.

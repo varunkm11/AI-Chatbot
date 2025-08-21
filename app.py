@@ -10,6 +10,8 @@ import pytz
 from dotenv import load_dotenv
 from config import *
 from models import db, ChatSession, ChatMessage, UserPreference
+from training_routes import training_bp
+from training_system import TrainingDataManager, SimpleRAGSystem
 import random
 
 # Load environment variables from .env file
@@ -24,6 +26,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize database
 db.init_app(app)
+
+# Register training blueprint
+app.register_blueprint(training_bp)
+
+# Initialize training system
+training_manager = TrainingDataManager()
+rag_system = SimpleRAGSystem(training_manager)
 
 # Create tables
 with app.app_context():
@@ -70,7 +79,7 @@ Today is {now.strftime('%A, %B %d, %Y')}
 Current time: {now.strftime('%I:%M %p')} ({TIMEZONE})"""
     
     def get_ai_response(self, message, session_id, model=None):
-        """Get response from AI API with retry logic"""
+        """Get response from AI API with retry logic and RAG enhancement"""
         if not API_KEY:
             return f"Error: {API_PROVIDER.upper()} API key not configured. Please set it in .env file."
         
@@ -88,21 +97,38 @@ Current time: {now.strftime('%I:%M %p')} ({TIMEZONE})"""
         real_time_context = self.get_real_time_context()
         api_used = f"{API_PROVIDER.upper()} API"
         
+        # Try to enhance message with RAG if knowledge base is available
+        enhanced_message = message
+        try:
+            if rag_system.is_trained:
+                enhanced_message = rag_system.generate_context_prompt(message, max_context_length=800)
+                if enhanced_message != message:
+                    print(f"RAG Enhancement Applied: Original query enhanced with relevant context")
+        except Exception as e:
+            print(f"RAG Enhancement Failed: {e}")
+            # Continue with original message if RAG fails
+            enhanced_message = message
+        
         # Prepare messages
         messages = [
             {
                 "role": "system",
-                "content": f"""You are Roseew, a helpful AI assistant with access to real-time information.
+                "content": f"""You are Roseew, a helpful AI assistant with access to real-time information and a knowledge base.
                 
 {real_time_context}
 
-You can provide current information and help with various tasks. Be conversational, helpful, and informative. Always introduce yourself as Roseew when asked about your name. If asked, tell the user you are using the {api_used} for responses."""
+You can provide current information and help with various tasks. Be conversational, helpful, and informative. 
+Always introduce yourself as Roseew when asked about your name. 
+If asked, tell the user you are using the {api_used} for responses.
+
+When you receive context from the knowledge base, use it to provide more accurate and detailed responses, 
+but always make your answers natural and conversational. Don't explicitly mention that you're using a knowledge base unless asked."""
             }
         ]
         
         # Add conversation history
         messages.extend(conversation_history)
-        messages.append({"role": "user", "content": message})
+        messages.append({"role": "user", "content": enhanced_message})
         
         # Retry logic for rate limiting
         max_retries = 3
@@ -152,11 +178,11 @@ You can provide current information and help with various tasks. Be conversation
                 
                 ai_response = result['choices'][0]['message']['content']
                 
-                # Save messages to database
+                # Save messages to database (save original message, not enhanced one)
                 user_message = ChatMessage(
                     session_id=session_id,
                     role='user',
-                    content=message,
+                    content=message,  # Store original message
                     model_used=model if model else (AVAILABLE_MODELS_LIST[0] if AVAILABLE_MODELS_LIST else AI_MODEL)
                 )
                 

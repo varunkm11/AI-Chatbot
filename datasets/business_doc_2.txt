@@ -1,0 +1,4 @@
+Title: Financial Management Basics
+Category: business_docs
+Content:
+Financial management includes budgeting, forecasting, cash flow management, investment analysis, risk assessment, and financial reporting. Key metrics include profit margins, liquidity ratios, and return on assets.

@@ -1,0 +1,4 @@
+Title: Study Techniques Guide
+Category: education_docs
+Content:
+Effective study techniques include active reading, spaced repetition, the Feynman technique, mind mapping, practice testing, and creating study schedules. Different techniques work better for different learning styles and subjects.

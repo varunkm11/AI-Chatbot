@@ -1,0 +1,27 @@
+[
+  {
+    "input": "What is a business plan?",
+    "output": "A business plan is a comprehensive document that outlines a company's goals, strategies, target market, financial projections, and operational plans. It serves as a roadmap for business success and is often required for funding.",
+    "category": "business"
+  },
+  {
+    "input": "How do you calculate ROI?",
+    "output": "Return on Investment (ROI) is calculated as: ROI = (Net Profit / Cost of Investment) × 100. It measures the efficiency of an investment and helps compare the profitability of different investments.",
+    "category": "business"
+  },
+  {
+    "input": "What is digital marketing?",
+    "output": "Digital marketing involves promoting products or services through digital channels such as search engines, social media, email, websites, and mobile apps. It includes SEO, content marketing, social media marketing, and paid advertising.",
+    "category": "business"
+  },
+  {
+    "input": "Explain supply chain management",
+    "output": "Supply chain management involves coordinating and integrating the flow of goods, services, and information from suppliers to customers. It includes procurement, production, inventory management, logistics, and distribution.",
+    "category": "business"
+  },
+  {
+    "input": "What is customer relationship management (CRM)?",
+    "output": "CRM is a strategy and technology for managing interactions with customers and potential customers. It helps businesses improve customer relationships, increase sales, and enhance customer retention through data analysis and automation.",
+    "category": "business"
+  }
+]
