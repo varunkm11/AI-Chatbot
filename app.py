@@ -20,8 +20,11 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY') or os.urandom(24).hex()
 
-# Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///chatbot.db')
+# Database configuration - Use PostgreSQL for production, SQLite for development
+if os.environ.get('VERCEL_ENV') == 'production':
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///chatbot.db')
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///chatbot.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize database
@@ -34,9 +37,10 @@ app.register_blueprint(training_bp)
 training_manager = TrainingDataManager()
 rag_system = SimpleRAGSystem(training_manager)
 
-# Create tables
-with app.app_context():
-    db.create_all()
+# Create tables - Only in development or when explicitly needed
+if not os.environ.get('VERCEL_ENV'):
+    with app.app_context():
+        db.create_all()
 
 # API Configuration based on provider
 API_PROVIDER = os.environ.get('API_PROVIDER', 'openrouter').lower()
