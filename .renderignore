@@ -1,0 +1,29 @@
+# Local development files
+*.pyc
+__pycache__/
+.env
+.env.local
+.DS_Store
+
+# Local database
+*.db
+training_data.db
+instance/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+.pytest_cache/
+.coverage
+
+# Documentation
+README.md
+*.md
+
+# Git
+.git/
+.gitignore

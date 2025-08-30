@@ -21,10 +21,13 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY') or os.urandom(24).hex()
 
 # Database configuration - Use PostgreSQL for production, SQLite for development
-if os.environ.get('VERCEL_ENV') == 'production':
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///chatbot.db')
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///chatbot.db')
+database_url = os.environ.get('DATABASE_URL', 'sqlite:///chatbot.db')
+
+# Handle PostgreSQL URL format for newer SQLAlchemy versions
+if database_url and database_url.startswith('postgres://'):
+    database_url = database_url.replace('postgres://', 'postgresql://', 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize database
@@ -38,9 +41,14 @@ training_manager = TrainingDataManager()
 rag_system = SimpleRAGSystem(training_manager)
 
 # Create tables - Only in development or when explicitly needed
-if not os.environ.get('VERCEL_ENV'):
+if not os.environ.get('DATABASE_URL') or os.environ.get('FLASK_ENV') == 'development':
     with app.app_context():
-        db.create_all()
+        try:
+            db.create_all()
+            print("✅ Database tables created successfully!")
+        except Exception as e:
+            print(f"⚠️ Database initialization error: {e}")
+            # In production, this might be handled by a separate migration script
 
 # API Configuration based on provider
 API_PROVIDER = os.environ.get('API_PROVIDER', 'openrouter').lower()
@@ -386,10 +394,26 @@ def load_session(session_id):
 
 @app.route('/health')
 def health():
-    """Health check endpoint for Heroku"""
-    tz = pytz.timezone(TIMEZONE)
-    now = datetime.now(tz)
-    return jsonify({'status': 'healthy', 'timestamp': now.isoformat()})
+    """Health check endpoint for deployment platforms"""
+    try:
+        # Test database connection
+        with app.app_context():
+            db.session.execute(db.text('SELECT 1'))
+        
+        tz = pytz.timezone(TIMEZONE)
+        now = datetime.now(tz)
+        return jsonify({
+            'status': 'healthy', 
+            'timestamp': now.isoformat(),
+            'database': 'connected',
+            'api_configured': bool(API_KEY)
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'unhealthy', 
+            'error': str(e),
+            'database': 'disconnected'
+        }), 500
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
