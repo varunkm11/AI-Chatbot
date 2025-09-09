@@ -4,7 +4,7 @@ A modern AI chatbot named Roseew, built with Python Flask and OpenRouter API, fe
 
 ## 🌟 Live Demo
 
-**🚀 [Try Roseew Live](https://roseew-ai-chatbot.vercel.app/)**
+**🚀 [Try Roseew Live](https://ai-chatbot-grgb.onrender.com/)**
 
 Experience the chatbot in action! The live demo is deployed on Vercel and ready to use.
 
@@ -21,12 +21,6 @@ Experience the chatbot in action! The live demo is deployed on Vercel and ready 
 ## 🔧 Quick Tech Overview
 
 **Frontend**: HTML5 + CSS3 + Vanilla JavaScript | **Backend**: Python Flask | **AI**: OpenRouter API (Claude 3.5 Sonnet) | **Deployment**: Vercel
-
-## 📸 Screenshots
-
-### 🖥️ Desktop Interface
-![Roseew AI Chatbot Desktop](screenshots/bot_preview.png)
-*Full desktop experience with sidebar navigation and real-time chat*
 
 
 ### ✨ Key Interface Features:
